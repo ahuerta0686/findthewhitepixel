@@ -1,0 +1,35 @@
+<html>
+	<head>
+		<title>Find the White Pixel</title>
+	</head>
+	<body>
+		<h3>Find the White Pixel</h3>
+		<canvas width="200" height="200" id="myCanvas"></canvas>
+		<script>
+			var canvas = document.getElementById('myCanvas');
+			var canvasContext = canvas.getContext('2d');
+			var clientOffsetX, clientOffsetY;
+			setOffsets();
+			var myX = Math.floor(Math.random() * 200);
+			var myY = Math.floor(Math.random() * 200);
+			canvasContext.fillStyle = 'rgba(255,255,255,1)';
+			canvasContext.fillRect(myX, myY, 1, 1);
+			canvas.onmousedown = clickCanvas;
+
+			function clickCanvas(event) {
+				event.preventDefault();
+				event.stopPropagation();
+				var x = event.clientX - canvasOffsetX;
+				var y = event.clientY - canvasOffsetY;
+				if (x >= myX && y <= myY + 1 && x <= myX + 1 && y >= myY) {
+					alert('You did it!');
+				}
+			}
+
+			function setOffsets() {
+				canvasOffsetX = canvas.getBoundingClientRect().left;
+				canvasOffsetY = canvas.getBoundingClientRect().top;
+			}
+		</script>
+	</body>
+</html>
